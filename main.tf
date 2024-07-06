@@ -9,5 +9,8 @@ module "spoke" {
  
   resource_groups = local.resource_group.resource_groups
   
+  providers = {
+    azurerm = azurerm.subscription1
+  }
 }
 
