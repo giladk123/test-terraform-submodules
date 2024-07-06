@@ -1,0 +1,16 @@
+{
+    "resource_groups": {
+        "we-ydev-azus-opdx-arutzim-rg": {
+            "rg_location": "West Europe",
+            "rg_tags": {
+                "environment": "dev"
+            }
+        },
+        "we-ydev-azus-opdx-marketing-rg": {
+            "rg_location": "West Europe",
+            "rg_tags": {
+                "environment": "dev"
+            }
+        }
+    }
+}
