@@ -1,3 +1,4 @@
-output "arutzim_resource_group_id" {
-  value = module.spoke.arutzim_resource_group_id
+output "resource-groups" {
+  value = module.spoke.resource_groups
+  description = "value of resource-groups"
 }
