@@ -1,6 +1,7 @@
 
 locals {
   resource_group          = jsondecode(file("./ccoe/rg.json"))
+  vnet_settings           = jsondecode(file("./network/vnet.json"))
 }
 
 module "spoke" {
@@ -8,7 +9,7 @@ module "spoke" {
   version = "1.0.3"
  
   resource_groups = local.resource_group.resource_groups
-  
+  vnets = local.vnet_settings.vnets
   providers = {
     azurerm = azurerm.subscription1
   }
