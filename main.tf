@@ -5,7 +5,7 @@ locals {
 
 module "spoke" {
   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm"
-  version = "1.0.2"
+  version = "1.0.3"
  
   resource_groups = local.resource_group.resource_groups
   
