@@ -1,0 +1,22 @@
+{
+    "keyvaults": {
+        "we-ydev-azus-opdx-01-kv": {
+            "location": "West Europe",
+            "resource_group_name": "we-ydev-azus-opdx-arutzim-rg",
+            "tenant_id": "233c7c56-1c47-4b81-a976-39ea1da0802a",
+            "soft_delete_retention_days": 18,
+            "purge_protection_enabled": true,
+            "sku_name": "standard",
+            "public_network_access_enabled": false
+        },
+        "we-ydev-azus-opdx-02-kv": {
+            "location": "West Europe",
+            "resource_group_name": "we-ydev-azus-opdx-arutzim-rg",
+            "tenant_id": "233c7c56-1c47-4b81-a976-39ea1da0802a",
+            "soft_delete_retention_days": 10,
+            "purge_protection_enabled": true,
+            "sku_name": "standard",
+            "public_network_access_enabled": false
+        }
+    }
+}
