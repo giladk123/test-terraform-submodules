@@ -13,7 +13,7 @@ module "spoke" {
   resource_groups     = local.resource_group.resource_groups
   vnets               = local.vnet_settings.vnets
   keyvaults           = local.keyvault_settings.keyvaults
-  zones               = local.dns_zones.dns_zones
+  zones               = local.dns_zones.zones
   resource_group_name = local.dns_zones.resource_group_name
   providers = {
     azurerm = azurerm.subscription1
