@@ -1,17 +1,20 @@
 
 locals {
-  resource_group          = jsondecode(file("./ccoe/rg.json"))
-  vnet_settings           = jsondecode(file("./network/vnet.json"))
-  keyvault_settings       = jsondecode(file("./ccoe/keyvault.json"))
+  resource_group    = jsondecode(file("./ccoe/rg.json"))
+  vnet_settings     = jsondecode(file("./network/vnet.json"))
+  keyvault_settings = jsondecode(file("./ccoe/keyvault.json"))
+  dns_zones         = jsondecode(file("./ccoe/private-dns-zones.json"))
 }
 
 module "spoke" {
   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm"
-  version = "1.0.15"
- 
-  resource_groups = local.resource_group.resource_groups
-  vnets = local.vnet_settings.vnets
-  keyvaults = local.keyvault_settings.keyvaults
+  version = "1.0.16"
+
+  resource_groups     = local.resource_group.resource_groups
+  vnets               = local.vnet_settings.vnets
+  keyvaults           = local.keyvault_settings.keyvaults
+  dns_zones           = local.dns_zones.dns_zones
+  resource_group_name = local.dns_zones.resource_group_name
   providers = {
     azurerm = azurerm.subscription1
   }
