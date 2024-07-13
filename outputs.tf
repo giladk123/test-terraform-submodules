@@ -14,12 +14,12 @@ output "subnets" {
 }
 
 output "keyvaults" {
-  value       = module.foundation.keyvaults
+  value       = module.modules_keyvault.keyvault
   description = "value of keyvaults"
 }
 
 output "dns_zones" {
-  value       = module.modules_private-dns-zone.dns_zones
+  value       = module.modules_private-dns-zone.dns_zone_ids
   description = "value of dns_zones"
 }
 
