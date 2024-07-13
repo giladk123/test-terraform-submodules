@@ -9,7 +9,7 @@ locals {
 module "foundation" {
   source  = "app.terraform.io/hcta-azure-dev/foundation/azurerm"
   version = "1.0.3"
-  
+
   resource_groups     = local.resource_group.resource_groups
   vnets               = local.vnet_settings.vnets
   
@@ -18,6 +18,19 @@ module "foundation" {
   }
 }
 
+module "modules_keyvault" {
+  source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/keyvault"
+  version = "1.0.0"
+
+  keyvaults = local.keyvault.keyvaults
+
+  depends_on = [ module.foundation ]
+
+  providers = {
+    azurerm = azurerm.subscription1
+  
+  }
+}
 
 
 # module "spoke_private-endpoint" {
