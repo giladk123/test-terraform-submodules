@@ -1,18 +1,19 @@
 
 locals {
-  resource_group    = jsondecode(file("./ccoe/rg.json"))
-  vnet_settings     = jsondecode(file("./network/vnet.json"))
-  keyvault = jsondecode(file("./ccoe/keyvault.json"))
-  dns_zones         = jsondecode(file("./ccoe/private-dns-zones.json"))
+  resource_group = jsondecode(file("./ccoe/rg.json"))
+  vnet_settings  = jsondecode(file("./network/vnet.json"))
+  keyvault       = jsondecode(file("./ccoe/keyvault.json"))
+  dns_zones      = jsondecode(file("./ccoe/private-dns-zones.json"))
+
 }
 
 module "foundation" {
   source  = "app.terraform.io/hcta-azure-dev/foundation/azurerm"
   version = "1.0.3"
 
-  resource_groups     = local.resource_group.resource_groups
-  vnets               = local.vnet_settings.vnets
-  
+  resource_groups = local.resource_group.resource_groups
+  vnets           = local.vnet_settings.vnets
+
   providers = {
     azurerm = azurerm.subscription1
   }
@@ -24,11 +25,11 @@ module "modules_keyvault" {
 
   keyvaults = local.keyvault.keyvaults
 
-  depends_on = [ module.foundation ]
+  depends_on = [module.foundation]
 
   providers = {
     azurerm = azurerm.subscription1
-  
+
   }
 }
 
@@ -36,54 +37,42 @@ module "modules_private-dns-zone" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-dns-zone"
   version = "1.0.0"
 
-  zones = local.dns_zones.zones
+  zones               = local.dns_zones.zones
   resource_group_name = local.dns_zones.resource_group_name
 
-  depends_on = [ module.foundation ]
+  depends_on = [module.foundation]
 
   providers = {
     azurerm = azurerm.subscription1
-  
+
   }
 }
 
 module "modules_private-endpoint" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-endpoint"
   version = "1.0.0"
-  
-  endpoints = {
-    "keyvault-endpoint": {
-      "name": "we-ydev-azus-opdx-01-kv01-pe",
-      "resource_group_name": module.foundation.resource-groups["we-ydev-azus-opdx-marketing-rg"].name,
-      "subnet_id": module.foundation.subnets["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
-      "private_dns_zone_id": module.modules_private-dns-zone.dns_zone_ids["privatelink.vaultcore.azure.net"],
-      "location": "westeurope",
-      "private_connection_resource_id": module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id,
-      "subresource_names": ["vault"]
-    }
-  }
+
+  endpoints = jsondecode(file("./ccoe/private-endpoints.json"))
+
+  depends_on = [module.foundation, module.modules_keyvault, module.modules_private-dns-zone]
+
 }
 
-# module "spoke_private-endpoint" {
-#   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm//modules/private-endpoint"
-#   version = "1.0.20"
-#   # insert required variables here
-  
+
+
+# module "modules_private-endpoint" {
+#   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-endpoint"
+#   version = "1.0.0"
+
 #   endpoints = {
-#     "keyvault-endpoint": {
-#       "name": "we-ydev-azus-opdx-01-kv01-pe",
-#       "resource_group_name": module.spoke.resource-groups["we-ydev-azus-opdx-arutzim-rg"].name,
-#       "subnet_id": module.spoke.subnets["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
-#       "private_dns_zone_id": module.spoke.dns_zones["privatelink.vaultcore.azure.net"],
-#       "location": "westeurope",
-#       "private_connection_resource_id": module.spoke.keyvaults["we-ydev-azus-opdx-01-kv"].id,
-#       "subresource_names": ["vault"]
+#     "keyvault-endpoint" : {
+#       "name" : "we-ydev-azus-opdx-01-kv01-pe",
+#       "resource_group_name" : module.foundation.resource-groups["we-ydev-azus-opdx-marketing-rg"].name,
+#       "subnet_id" : module.foundation.subnets["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
+#       "private_dns_zone_id" : module.modules_private-dns-zone.dns_zone_ids["privatelink.vaultcore.azure.net"],
+#       "location" : "westeurope",
+#       "private_connection_resource_id" : module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id,
+#       "subresource_names" : ["vault"]
 #     }
-#   }
-
-#   depends_on = [ module.spoke ]
-
-#   providers = {
-#     azurerm = azurerm.subscription1
 #   }
 # }

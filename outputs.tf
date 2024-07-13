@@ -10,7 +10,7 @@ output "vnets" {
 
 output "subnets" {
   value       = module.foundation.subnets
-  description = "value of subnets"  
+  description = "value of subnets"
 }
 
 output "keyvaults" {
