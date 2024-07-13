@@ -8,6 +8,12 @@ output "vnets" {
   description = "value of vnets"
 }
 
+output "subnets" {
+  value       = module.spoke.subnets
+  description = "value of subnets"
+  
+}
+
 output "keyvaults" {
   value       = module.spoke.keyvaults
   description = "value of keyvaults"
