@@ -23,3 +23,8 @@ output "dns_zones" {
   value       = module.spoke.dns_zones
   description = "value of dns_zones"
 }
+
+output "private-endpoint" {
+  value       = module.spoke_private-endpoint.private_endpoints
+  description = "value of private-endpoint"
+}
