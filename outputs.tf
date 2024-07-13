@@ -13,15 +13,15 @@ output "subnets" {
   description = "value of subnets"  
 }
 
-# output "keyvaults" {
-#   value       = module.spoke.keyvaults
-#   description = "value of keyvaults"
-# }
+output "keyvaults" {
+  value       = module.foundation.keyvaults
+  description = "value of keyvaults"
+}
 
-# output "dns_zones" {
-#   value       = module.spoke.dns_zones
-#   description = "value of dns_zones"
-# }
+output "dns_zones" {
+  value       = module.modules_private-dns-zone.dns_zones
+  description = "value of dns_zones"
+}
 
 # output "private-endpoint" {
 #   value       = module.spoke_private-endpoint.private_endpoints

@@ -32,6 +32,21 @@ module "modules_keyvault" {
   }
 }
 
+module "modules_private-dns-zone" {
+  source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-dns-zone"
+  version = "1.0.0"
+
+  zones = local.dns_zones.zones
+  resource_group_name = local.dns_zones.resource_group_name
+
+  depends_on = [ module.foundation ]
+
+  providers = {
+    azurerm = azurerm.subscription1
+  
+  }
+}
+
 
 # module "spoke_private-endpoint" {
 #   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm//modules/private-endpoint"
