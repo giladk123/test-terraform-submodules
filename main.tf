@@ -29,7 +29,7 @@ module "spoke_private-endpoint" {
     "keyvault-endpoint": {
       "name": "we-ydev-azus-opdx-01-kv01-pe",
       "resource_group_name": module.spoke.resource-groups["we-ydev-azus-opdx-arutzim-rg"].name,
-      "subnet_id": module.spoke.subnet["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
+      "subnet_id": module.spoke.vnets["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
       "private_dns_zone_id": module.spoke.dns_zones["privatelink.vaultcore.azure.net"],
       "location": "westeurope",
       "private_connection_resource_id": module.spoke.keyvaults["we-ydev-azus-opdx-01-kv"].id,
