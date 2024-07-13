@@ -2,7 +2,7 @@
 locals {
   resource_group    = jsondecode(file("./ccoe/rg.json"))
   vnet_settings     = jsondecode(file("./network/vnet.json"))
-  keyvault_settings = jsondecode(file("./ccoe/keyvault.json"))
+  keyvault = jsondecode(file("./ccoe/keyvault.json"))
   dns_zones         = jsondecode(file("./ccoe/private-dns-zones.json"))
 }
 
