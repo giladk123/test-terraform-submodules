@@ -53,9 +53,9 @@ module "modules_private-endpoint" {
   
   endpoints = {
     "keyvault-endpoint": {
-      "name": "<private endpoint name>-pe",
-      "resource_group_name": module.foundation.resource_groups["we-ydev-azus-opdx-marketing-rg"].name,
-      "subnet_id": module.foundation.subnet["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
+      "name": "we-ydev-azus-opdx-01-kv01-pe",
+      "resource_group_name": module.foundation.resource-groups["we-ydev-azus-opdx-marketing-rg"].name,
+      "subnet_id": module.foundation.subnets["we-ydev-azus-opdx-crm-vnet-keyvault"].id,
       "private_dns_zone_id": module.modules_private-dns-zone.dns_zone_ids["privatelink.vaultcore.azure.net"],
       "location": "westeurope",
       "private_connection_resource_id": module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id,
