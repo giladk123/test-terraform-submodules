@@ -8,7 +8,7 @@ locals {
 
 module "spoke" {
   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm"
-  version = "1.0.17"
+  version = "1.0.19"
 
   resource_groups     = local.resource_group.resource_groups
   vnets               = local.vnet_settings.vnets
@@ -22,7 +22,7 @@ module "spoke" {
 
 module "spoke_private-endpoint" {
   source  = "app.terraform.io/hcta-azure-dev/spoke/azurerm//modules/private-endpoint"
-  version = "1.0.18"
+  version = "1.0.19"
   # insert required variables here
   
   endpoints = {
