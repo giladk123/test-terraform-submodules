@@ -21,7 +21,7 @@ module "foundation" {
 
 module "modules_keyvault" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/keyvault"
-  version = "1.0.0"
+  version = "1.0.1"
 
   keyvaults = local.keyvault.keyvaults
 
@@ -35,7 +35,7 @@ module "modules_keyvault" {
 
 module "modules_private-dns-zone" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-dns-zone"
-  version = "1.0.0"
+  version = "1.0.1"
 
   zones               = local.dns_zones.zones
   resource_group_name = local.dns_zones.resource_group_name
@@ -51,7 +51,7 @@ module "modules_private-dns-zone" {
 
 module "modules_private-endpoint" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-endpoint"
-  version = "1.0.0"
+  version = "1.0.1"
 
   endpoints = {
     "keyvault-endpoint" : {
@@ -73,7 +73,7 @@ module "modules_role-assignment" {
    azure_rbac = [
     {
       key           = "owner on subscription"
-      scope         = "9e785b86-3d84-41ac-aae8-3432bdd69ffc"
+      scope         = "/subscriptions/9e785b86-3d84-41ac-aae8-3432bdd69ffc"
       role          = "Owner"
       principal_id  = "5ac7d1b9-f75b-4f2c-af6a-a0e920e6745c"
     }
