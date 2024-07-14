@@ -27,3 +27,8 @@ output "private-endpoint" {
   value       = module.modules_private-endpoint.private_endpoints
   description = "value of private-endpoint"
 }
+
+output "role_assignments" {
+  value       = module.modules_role-assignment.role_assignments
+  description = "value of role_assignments"
+}
