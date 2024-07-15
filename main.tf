@@ -75,7 +75,7 @@ module "modules_role-assignment" {
       key           = "owner on subscription"
       scope         = "/subscriptions/9e785b86-3d84-41ac-aae8-3432bdd69ffc"
       role          = "Owner"
-      principal_id  = "5ac7d1b9-f75b-4f2c-af6a-a0e920e6745c"
+      principal_id  = "524a5584-1475-449c-9813-d26d42903d19"
     }
   ]
 }
