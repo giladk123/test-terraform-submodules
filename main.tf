@@ -1,6 +1,7 @@
 
 locals {
   resource_group    = jsondecode(file("./ccoe/rg.json"))
+  management_group  = jsondecode(file("./ccoe/management-group.json"))
   vnet_settings     = jsondecode(file("./network/vnet.json"))
   keyvault          = jsondecode(file("./ccoe/keyvault.json"))
   dns_zones         = jsondecode(file("./ccoe/private-dns-zones.json"))
@@ -169,4 +170,11 @@ module "modules_service-principal" {
 
   service_principals = local.service-principal
   assignments        = local.assignments
+}
+
+module "modules_management-group" {
+  source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/management-group"
+  version = "1.0.6"
+  
+  data = local.management_group
 }
