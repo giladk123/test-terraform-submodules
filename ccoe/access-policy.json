@@ -1,0 +1,17 @@
+{
+    "policy1": {
+      "key_permissions": ["Get", "List", "Delete", "Create", "Import", "Backup", "Restore", "Recover"],
+      "secret_permissions": ["Get", "List", "Delete", "Backup", "Restore", "Recover"],
+      "certificate_permissions": ["Get", "List", "Delete", "Create", "Import", "Backup", "Restore", "Recover"]
+    },
+    "policy2": {
+      "key_permissions": ["Get", "List"],
+      "secret_permissions": ["Get", "List"],
+      "certificate_permissions": ["Get", "List"]
+    },
+    "policy3": {
+        "key_permissions": ["Get", "List", "Delete"],
+        "secret_permissions": ["Get", "List"],
+        "certificate_permissions": ["Get", "List"]
+      }
+  }
