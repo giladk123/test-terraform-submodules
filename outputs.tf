@@ -68,3 +68,8 @@ output "sp_application_id" {
   value       = module.modules_service-principal.sp_application_id
   description = "The application ID of the service principal."
 }
+
+output "management_groups" {
+  value      = module.modules_management-group.management_groups
+  description = "Access policies applied to the key vault"
+}
