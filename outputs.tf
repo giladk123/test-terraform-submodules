@@ -46,6 +46,7 @@ output "role_assignments_details_from_module" {
 output "app_registration_client_secret" {
   value       = module.modules_service-principal.app_registration_client_secret
   description = "The client secret generated for the Azure AD app registration."
+  sensitive = true
 }
 
 output "app_registration_object_id" {
