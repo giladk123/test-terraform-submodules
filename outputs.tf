@@ -32,3 +32,8 @@ output "role_assignments" {
   value       = module.modules_role-assignment.role_assignments
   description = "value of role_assignments"
 }
+
+output "access_policies" {
+  description = "Access policies applied to the key vault"
+  value       = module.modules_keyvault-access-policy.access_policies
+}
