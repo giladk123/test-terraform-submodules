@@ -86,7 +86,7 @@ module "modules_keyvault-access-policy" {
   
   access_policies = {
     policy1 = {
-      key_vault_id = module.keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id
+      key_vault_id = module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id
       tenant_id = "233c7c56-1c47-4b81-a976-39ea1da0802a"
       object_id = "5ac7d1b9-f75b-4f2c-af6a-a0e920e6745c"
       key_permissions = local.access_policy.policy1.key_permissions
@@ -94,7 +94,7 @@ module "modules_keyvault-access-policy" {
       certificate_permissions = local.access_policy.policy1.certificate_permissions
     },
     policy2 = {
-      key_vault_id = module.keyvault.keyvault["we-ydev-azus-opdx-02-kv"].id
+      key_vault_id = module.modules_keyvault.keyvault["we-ydev-azus-opdx-02-kv"].id
       tenant_id = "233c7c56-1c47-4b81-a976-39ea1da0802a"
       object_id = "5ac7d1b9-f75b-4f2c-af6a-a0e920e6745c"
       key_permissions = local.access_policy.policy2.key_permissions
@@ -102,7 +102,7 @@ module "modules_keyvault-access-policy" {
       certificate_permissions = local.access_policy.policy2.certificate_permissions
     },
     policy3 = {
-      key_vault_id = module.keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id
+      key_vault_id = module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id
       tenant_id = "233c7c56-1c47-4b81-a976-39ea1da0802a"
       object_id = "da9c795c-fa3b-41f1-ba6a-c9cf69419c28"
       key_permissions = local.access_policy.policy2.key_permissions
