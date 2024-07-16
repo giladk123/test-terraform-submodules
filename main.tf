@@ -176,5 +176,5 @@ module "modules_management-group" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/management-group"
   version = "1.0.6"
   
-  data = local.management_group
+  data = "${path.module}/ccoe/management-group.json"
 }
