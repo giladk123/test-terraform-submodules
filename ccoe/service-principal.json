@@ -1,0 +1,14 @@
+[
+    {
+      "name": "secret-api-1",
+      "owner_username": "giladk_gmail.com#EXT#@giladkgmail.onmicrosoft.com",
+      "client_secret_name": "client1",
+      "secret_rotation_days": 365
+    },
+    {
+      "name": "secret-api-2",
+      "owner_username": "hadark@giladkgmail.onmicrosoft.com",
+      "client_secret_name": "client2",
+      "secret_rotation_days": 365
+    }
+  ]

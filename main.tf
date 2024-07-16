@@ -1,15 +1,28 @@
 
 locals {
-  resource_group = jsondecode(file("./ccoe/rg.json"))
-  vnet_settings  = jsondecode(file("./network/vnet.json"))
-  keyvault       = jsondecode(file("./ccoe/keyvault.json"))
-  dns_zones      = jsondecode(file("./ccoe/private-dns-zones.json"))
-  access_policy  = jsondecode(file("./ccoe/access-policy.json"))
+  resource_group    = jsondecode(file("./ccoe/rg.json"))
+  vnet_settings     = jsondecode(file("./network/vnet.json"))
+  keyvault          = jsondecode(file("./ccoe/keyvault.json"))
+  dns_zones         = jsondecode(file("./ccoe/private-dns-zones.json"))
+  access_policy     = jsondecode(file("./ccoe/access-policy.json"))
+  service-principal = jsondecode(file("./ccoe/service-principal.json"))
+  assignments = [
+    {
+      sp_name              = "secret-api-1",
+      scope                = "/subscriptions/9e785b86-3d84-41ac-aae8-3432bdd69ffc",
+      role_definition_name = "Contributor"
+    },
+    {
+      sp_name              = "secret-api-2",
+      scope                = "/subscriptions/9e785b86-3d84-41ac-aae8-3432bdd69ffc",
+      role_definition_name = "Reader"
+    }
+  ]
 }
 
 # module "foundation" {
 #   source  = "app.terraform.io/hcta-azure-dev/foundation/azurerm"
-#   version = "1.0.3"
+#   version = "1.0.5"
 
 #   resource_groups = local.resource_group.resource_groups
 #   vnets           = local.vnet_settings.vnets
@@ -21,7 +34,7 @@ locals {
 
 # module "modules_keyvault" {
 #   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/keyvault"
-#   version = "1.0.3"
+#   version = "1.0.5"
 
 #   keyvaults = local.keyvault.keyvaults
 
@@ -35,7 +48,7 @@ locals {
 
 # module "modules_private-dns-zone" {
 #   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-dns-zone"
-#   version = "1.0.3"
+#   version = "1.0.5"
 
 #   zones               = local.dns_zones.zones
 #   resource_group_name = local.dns_zones.resource_group_name
@@ -51,7 +64,7 @@ locals {
 
 # module "modules_private-endpoint" {
 #   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/private-endpoint"
-#   version = "1.0.3"
+#   version = "1.0.5"
 
 #   endpoints = {
 #     "keyvault-endpoint" : {
@@ -68,8 +81,8 @@ locals {
 
 # module "modules_role-assignment" {
 #   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/role-assignment"
-#   version = "1.0.3"
-  
+#   version = "1.0.5"
+
 #    azure_rbac = [
 #     {
 #       key           = "owner on subscription"
@@ -82,8 +95,8 @@ locals {
 
 # module "modules_keyvault-access-policy" {
 #   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/keyvault-access-policy"
-#   version = "1.0.3"
-  
+#   version = "1.0.5"
+
 #   access_policies = {
 #     policy1 = {
 #       key_vault_id = module.modules_keyvault.keyvault["we-ydev-azus-opdx-01-kv"].id
@@ -120,8 +133,8 @@ locals {
 
 module "modules_azuread-role-assignment" {
   source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/azuread-role-assignment"
-  version = "1.0.4"
-  
+  version = "1.0.5"
+
   roles_assignments = [
     {
       role_names = [
@@ -148,4 +161,12 @@ module "modules_azuread-role-assignment" {
 
     #### Add more role assignments as needed
   ]
+}
+
+module "modules_service-principal" {
+  source  = "app.terraform.io/hcta-azure-dev/modules/azurerm//modules/service-principal"
+  version = "1.0.5"
+
+  service_principals = local.service-principal
+  assignments        = local.assignments
 }

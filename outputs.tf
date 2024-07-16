@@ -42,3 +42,28 @@ output "role_assignments_details_from_module" {
   value       = module.modules_azuread-role-assignment.role_assignments_details
   description = "A map of Azure AD role assignments including role IDs and principal object IDs from the azuread_role_assignment module."
 }
+
+output "app_registration_client_secret" {
+  value       = module.modules_service-principal.app_registration_client_secret
+  description = "The client secret generated for the Azure AD app registration."
+}
+
+output "app_registration_object_id" {
+  value       = module.modules_service-principal.app_registration_object_id
+  description = "The object ID of the Azure AD app registration."
+}
+
+output "app_registration_application_id" {
+  value       = module.modules_service-principal.app_registration_application_id
+  description = "The application ID of the Azure AD app registration."
+}
+
+output "sp_object_id" {
+  value       = module.modules_service-principal.sp_object_id
+  description = "The object ID of the service principal."
+}
+
+output "sp_application_id" {
+  value       = module.modules_service-principal.sp_application_id
+  description = "The application ID of the service principal."
+}
